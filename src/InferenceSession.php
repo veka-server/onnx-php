@@ -325,7 +325,7 @@ class InferenceSession
         $this->checkStatus(($this->api->CreateCpuMemoryInfo)(1, 0, \FFI::addr($allocatorInfo)));
         $inputFeedSize = count($inputFeed);
         if ($inputFeedSize == 0) {
-            throw new Exception('No input');
+            throw new \Exception('No input');
         }
         $inputTensor = $this->ffi->new("OrtValue*[$inputFeedSize]");
 
@@ -341,7 +341,7 @@ class InferenceSession
                 }
             }
             if (is_null($inp)) {
-                throw new Exception("Unknown input: $inputName");
+                throw new \Exception("Unknown input: $inputName");
             }
 
             $shape = $input->shape();
@@ -565,7 +565,7 @@ class InferenceSession
         if (!is_null($status)) {
             $message = (self::api()->GetErrorMessage)($status);
             (self::api()->ReleaseStatus)($status);
-            throw new Exception($message);
+            throw new \Exception($message);
         }
     }
 
@@ -681,7 +681,7 @@ class InferenceSession
 
     private function unsupportedType($name, $type)
     {
-        throw new Exception("Unsupported $name type: $type");
+        throw new \Exception("Unsupported $name type: $type");
     }
 
     private function readArray($cdata)
@@ -718,7 +718,7 @@ class InferenceSession
             $dest = $libc->new('char[' . ($max * 2) . ']');
             $ret = $libc->mbstowcs($dest, $str, $max);
             if ($ret != strlen($str)) {
-                throw new Exception('Expected mbstowcs to return ' . strlen($str) . ", got $ret");
+                throw new \Exception('Expected mbstowcs to return ' . strlen($str) . ", got $ret");
             }
             return $dest;
         } else {
