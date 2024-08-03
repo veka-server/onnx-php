@@ -99,6 +99,8 @@ class Librairie
             mkdir($path);
         }
 
+        $path = realpath($path);
+
         self::$folder = $path;
         FFI::$lib = self::defaultLib();
     }
