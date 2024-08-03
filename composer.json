@@ -1,0 +1,30 @@
+{
+    "name": "veka-server/onnx-php",
+    "description": "lib for use onnxruntime with php",
+    "license": "MIT",
+    "keywords": ["onnx","php","onnxruntime","llm", "models", "ai"],
+    "authors": [
+        {
+            "name": "veka-server",
+            "email": "veka610@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Onnx\\" : "src/"
+        }
+    },
+    "require": {
+        "php": ">= 8.1",
+        "ext-ffi": ">= 8.1",
+        "ffi/work-directory": "^1.0"
+    },
+    "scripts": {
+        "download-lib": [
+            "@php bin/download-lib.php"
+        ]
+    },
+    "scripts-descriptions": {
+        "download-lib": "Download the onnxruntime librairie"
+    }
+}
