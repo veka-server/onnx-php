@@ -2,8 +2,6 @@
 
 namespace Onnx;
 
-use bin\Vendor;
-
 class FFI
 {
     public static $lib;
@@ -376,7 +374,7 @@ class FFI
                     OrtStatus*(* GetCUDAProviderOptionsAsString)();
                     void(* ReleaseCUDAProviderOptions)(OrtCUDAProviderOptionsV2* input);
                 };
-            ', self::$lib ?? Vendor::defaultLib());
+            ', self::$lib ?? Download::defaultLib());
         }
 
         return self::$instance;
