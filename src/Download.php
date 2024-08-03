@@ -75,6 +75,17 @@ class Download
         echo "✔ Success\n";
     }
 
+    /**
+     * @throws OnnxException
+     */
+    public static function ThrowExceptionIfLibNotFound()
+    {
+        $dest = self::defaultLib();
+        if (!file_exists($dest)) {
+            throw new OnnxException('OnnxRuntime not found');
+        }
+    }
+
     public static function defaultLib()
     {
         return self::libDir() . '/' . self::libFile();
