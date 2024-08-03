@@ -1,7 +1,7 @@
 <?php
 namespace Onnx;
 
-class Librairie
+class Library
 {
 
     protected static $folder ;

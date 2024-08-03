@@ -374,7 +374,7 @@ class FFI
                     OrtStatus*(* GetCUDAProviderOptionsAsString)();
                     void(* ReleaseCUDAProviderOptions)(OrtCUDAProviderOptionsV2* input);
                 };
-            ', self::$lib ?? Librairie::defaultLib());
+            ', self::$lib ?? Library::defaultLib());
         }
 
         return self::$instance;
