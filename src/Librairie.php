@@ -85,22 +85,27 @@ class Librairie
 
     public static function defaultLib()
     {
-        return self::libDir() . '/' . self::libFile();
+        return self::libDir() . DIRECTORY_SEPARATOR . self::libFile();
     }
 
     private static function libDir()
     {
-        return ( self::$folder. '/lib' ?? __DIR__. '/../lib') ;
+        return ( self::$folder ?? dirname(__DIR__)).DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR ;
     }
 
     public static function setFolder(String $path){
+
+        if(!is_dir($path)){
+            mkdir($path);
+        }
+
         self::$folder = $path;
-        FFI::$lib = $path;
+        FFI::$lib = self::defaultLib();
     }
 
     private static function libFile()
     {
-        return self::withVersion(self::platform('file') . '/lib/' . self::platform('lib'));
+        return self::withVersion(self::platform('file') . DIRECTORY_SEPARATOR.'lib'.DIRECTORY_SEPARATOR . self::platform('lib'));
     }
 
     private static function platform($key)
