@@ -8,7 +8,7 @@ class Model
 
     public function __construct($path, ...$sessionOptions)
     {
-        Download::ThrowExceptionIfLibNotFound();
+        Librairie::ThrowExceptionIfLibNotFound();
         $this->session = new InferenceSession($path, ...$sessionOptions);
     }
 

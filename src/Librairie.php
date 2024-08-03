@@ -1,8 +1,10 @@
 <?php
 namespace Onnx;
 
-class Download
+class Librairie
 {
+
+    protected static $folder ;
     public const VERSION = '1.18.0';
 
     public const PLATFORMS = [
@@ -38,11 +40,10 @@ class Download
         ]
     ];
 
-    public static function check($event = null)
+    public static function install($event = null)
     {
         $dest = self::defaultLib();
         if (file_exists($dest)) {
-            echo "✔ ONNX Runtime found\n";
             return;
         }
 
@@ -50,8 +51,6 @@ class Download
         if (!file_exists($dir)) {
             mkdir($dir);
         }
-
-        echo "Downloading ONNX Runtime...\n";
 
         $file = self::platform('file');
         $ext = self::platform('ext');
@@ -71,8 +70,6 @@ class Download
             $archive = $archive->decompress();
         }
         $archive->extractTo(self::libDir());
-
-        echo "✔ Success\n";
     }
 
     /**
@@ -93,7 +90,12 @@ class Download
 
     private static function libDir()
     {
-        return __DIR__ . '/../lib';
+        return ( self::$folder. '/lib' ?? __DIR__. '/../lib') ;
+    }
+
+    public static function setFolder(String $path){
+        self::$folder = $path;
+        FFI::$lib = $path;
     }
 
     private static function libFile()
