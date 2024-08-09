@@ -11,11 +11,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "Onnx\\" : "src/"
+            "Onnx\\" : "src/",
+            "FFI\\Env\\": "env/src",
+            "FFI\\WorkDirectory\\": "work-directory/src"
         }
     },
     "require": {
         "php": ">= 7",
-        "ffi/work-directory": "^1.0"
+        "ext-mbstring": "*",
+        "ext-ffi": "*"
     }
 }
