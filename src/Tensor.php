@@ -84,7 +84,7 @@ class Tensor implements TensorInterface
 
         $buffer = [];
         foreach ($data as $i => $value) {
-            $buffer[$i - 1] = $dtype->castValue($value);
+            $buffer[$i - 1] = DType::castValue($dtype, $value);
         }
 
         return new static($buffer, $shape, $dtype);
