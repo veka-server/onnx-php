@@ -14,7 +14,12 @@ class Model
 
     public function predict($inputFeed, $outputNames = null, ...$runOptions)
     {
-        $outputNames ??= array_map(fn ($o) => $o['name'], $this->outputs());
+        // Check if $outputNames is not set or null
+        if (!isset($outputNames)) {
+            $outputNames = array_map(function($o) {
+                return $o['name'];
+            }, $this->outputs());
+        }
         $predictions = $this->session->run($outputNames, $inputFeed, ...$runOptions);
         return array_combine($outputNames, $predictions);
     }

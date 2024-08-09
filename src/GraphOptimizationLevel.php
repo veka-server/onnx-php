@@ -2,10 +2,11 @@
 
 namespace Onnx;
 
-enum GraphOptimizationLevel: int
+class GraphOptimizationLevel
 {
-    case None = 0;
-    case Basic = 1;
-    case Extended = 2;
-    case All = 99;
+    const NONE = 0;
+    const BASIC = 1;
+    const EXTENDED = 2;
+    const ALL = 99;
+
 }

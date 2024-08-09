@@ -2,8 +2,9 @@
 
 namespace Onnx;
 
-enum ExecutionMode: int
+class ExecutionMode
 {
-    case Sequential = 0;
-    case Parallel = 1;
+    const SEQUENTIAL = 0;
+    const PARALLEL = 1;
+
 }

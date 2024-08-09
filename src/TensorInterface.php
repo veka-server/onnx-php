@@ -20,9 +20,9 @@ interface TensorInterface extends ArrayAccess, Countable, IteratorAggregate
 
     public function size(): int;
 
-    public static function fromArray(array $array, DType $dtype, array $shape): self;
+    public static function fromArray(array $array, $dtype, $shape);
 
-    public static function fromString(string $string, DType $dtype, array $shape): self;
+    public static function fromString(string $string, $dtype, array $shape);
 
     public function toArray(): array;
 

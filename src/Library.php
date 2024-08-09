@@ -5,9 +5,9 @@ class Library
 {
 
     protected static $folder ;
-    public const VERSION = '1.18.0';
+    const VERSION = '1.18.0';
 
-    public const PLATFORMS = [
+    const PLATFORMS = [
         'x86_64-linux' => [
             'file' => 'onnxruntime-linux-x64-{{version}}',
             'checksum' => 'fa4d11b3fa1b2bf1c3b2efa8f958634bc34edc95e351ac2a0408c6ad5c5504f0',
@@ -117,9 +117,9 @@ class Library
 
     private static function platformKey()
     {
-        if (PHP_OS_FAMILY == 'Windows') {
+        if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows') {
             return 'x64-windows';
-        } elseif (PHP_OS_FAMILY == 'Darwin') {
+        } elseif (PHP_OS == 'Darwin') {
             if (php_uname('m') == 'x86_64') {
                 return 'x86_64-darwin';
             } else {

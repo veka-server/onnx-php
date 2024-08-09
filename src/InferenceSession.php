@@ -128,7 +128,11 @@ class InferenceSession
 
         $inputTensor = $this->createInputTensor($inputFeed, $refs);
 
-        $outputNames ??= array_map(fn($v) => $v['name'], $this->outputs);
+        if (!isset($outputNames)) {
+            $outputNames = array_map(function($v) {
+                return $v['name'];
+            }, $this->outputs);
+        }
 
         $outputsSize = count($outputNames);
         $outputTensor = $this->ffi->new("OrtValue*[$outputsSize]");
@@ -362,7 +366,11 @@ class InferenceSession
                 $this->checkStatus(($this->api->CreateTensorAsOrtValue)($this->allocator, $inputNodeShape, $ndim, $typeEnum, \FFI::addr($inputTensor[$idx])));
                 $this->checkStatus(($this->api->FillStringTensor)($inputTensor[$idx], $inputTensorValues, count($inputTensorValues)));
             } else {
-                $inputTypes = array_flip(array_map(fn($v) => "tensor($v)", $this->elementDataTypes()));
+
+                $inputTypes = array_flip(array_map(function($v) {
+                    return "tensor($v)";
+                }, $this->elementDataTypes()));
+
                 if (isset($inputTypes[$inp['type']])) {
                     $typeEnum = $inputTypes[$inp['type']];
                     $castType = $this->castTypes()[$typeEnum];
@@ -404,7 +412,7 @@ class InferenceSession
         return $inputTensor;
     }
 
-    private function fillStringTensorValues(TensorInterface $input, $ptr, &$refs) :void
+    private function fillStringTensorValues(TensorInterface $input, $ptr, &$refs)
     {
         foreach ($input->buffer() as $i => $v) {
             $strPtr = $this->cstring($v);
@@ -429,7 +437,7 @@ class InferenceSession
     {
         $bytes = strlen($str) + 1;
         // TODO fix?
-        $ptr = $this->ffi->new("char[$bytes]", owned: false);
+        $ptr = $this->ffi->new("char[$bytes]", false);
         \FFI::memcpy($ptr, $str, $bytes - 1);
         $ptr[$bytes - 1] = "\0";
         return $ptr;
@@ -445,7 +453,7 @@ class InferenceSession
                 $typeinfo = $this->ffi->new('OrtTensorTypeAndShapeInfo*');
                 $this->checkStatus(($this->api->GetTensorTypeAndShape)($outPtr, \FFI::addr($typeinfo)));
 
-                [$type, $shape] = $this->tensorTypeAndShape($typeinfo);
+                list($type, $shape) = $this->tensorTypeAndShape($typeinfo);
 
                 // TODO skip if string
                 $tensorData = $this->ffi->new('void*');
@@ -467,7 +475,7 @@ class InferenceSession
                 } elseif ($type == $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING) {
                     $arr = $this->createStringsFromOnnxValue($outPtr, $outputTensorSize);
 
-                    return Tensor::fromArray($arr, DType::String, $shape);
+                    return Tensor::fromArray($arr, DType::STRING, $shape);
                 } else {
                     $this->unsupportedType('element', $type);
                 }
@@ -521,22 +529,22 @@ class InferenceSession
     {
         return [
             $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UNDEFINED => 'undefined',
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT => DType::Float32,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT8 => DType::Uint8,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT8 => DType::Int8,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT16 => DType::Uint16,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT16 => DType::Int16,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT32 => DType::Int32,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT64 => DType::Int64,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING => DType::String,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_BOOL => DType::Bool,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT16 => DType::Float16,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_DOUBLE => DType::Float64,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT32 => DType::Uint32,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT64 => DType::Uint64,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_COMPLEX64 => DType::Complex64,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_COMPLEX128 => DType::Complex128,
-            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_BFLOAT16 => DType::BFloat16
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT => DType::FLOAT32,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT8 => DType::UINT8,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT8 => DType::INT8,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT16 => DType::UINT16,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT16 => DType::INT16,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT32 => DType::INT32,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_INT64 => DType::INT64,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_STRING => DType::STRING,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_BOOL => DType::BOOL,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT16 => DType::FLOAT16,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_DOUBLE => DType::FLOAT64,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT32 => DType::UINT32,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_UINT64 => DType::UINT64,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_COMPLEX64 => DType::COMPLEX64,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_COMPLEX128 => DType::COMPLEX128,
+            $this->ffi->ONNX_TENSOR_ELEMENT_DATA_TYPE_BFLOAT16 => DType::BFLOAT16
         ];
     }
 
@@ -579,7 +587,7 @@ class InferenceSession
             // don't free tensor_info
             $this->checkStatus(($this->api->CastTypeInfoToTensorInfo)($typeinfo, \FFI::addr($tensorInfo)));
 
-            [$type, $shape] = $this->tensorTypeAndShape($tensorInfo);
+            list($type, $shape) = $this->tensorTypeAndShape($tensorInfo);
             $elementDataType = $this->elementDataTypes()[$type];
             return ['type' => "tensor($elementDataType)", 'shape' => $shape];
         } elseif ($onnxType->cdata == $this->ffi->ONNX_TYPE_SEQUENCE) {
@@ -709,7 +717,7 @@ class InferenceSession
     // see ORTCHAR_T in onnxruntime_c_api.h
     private function ortString($str)
     {
-        if (PHP_OS_FAMILY == 'Windows') {
+        if (PHP_OS == 'WINNT' || PHP_OS == 'WIN32' || PHP_OS == 'Windows') {
             $libc = FFI::libc();
             $max = strlen($str) + 1; // for null byte
             // wchar_t not supported

@@ -12,6 +12,10 @@ use Traversable;
 
 class Tensor implements TensorInterface
 {
+    protected $buffer;
+    protected $shape;
+    protected $dtype;
+
     /**
      * Construct a new Tensor instance.
      *
@@ -20,28 +24,33 @@ class Tensor implements TensorInterface
      * @param DType $dtype The data type of the tensor.
      */
     public function __construct(
-        protected array $buffer,
-        protected array $shape,
-        protected DType $dtype
+        array $buffer,
+        array $shape,
+        DType $dtype
     ) {
+        $this->dtype = $dtype;
+        $this->shape = $shape;
+        $this->buffer = $buffer;
     }
 
     /**
      * Create a Tensor instance from a PHP array.
      *
      * @param array $array The input array.
-     * @param DType|null $dtype The data type of the tensor (optional).
+     * @param mixed $dtype The data type of the tensor (optional).
      * @param array|null $shape The shape of the tensor (optional).
      * @return static The created Tensor instance.
      * @throws InvalidArgumentException If the shape isn't provided when the array is empty.
      */
-    public static function fromArray(array $array, ?DType $dtype = null, ?array $shape = null) :static
+    public static function fromArray(array $array, $dtype = null,  $shape = null)
     {
         if (empty($array) && $shape === null) {
             throw new InvalidArgumentException('Shape must be provided when the array is empty');
         }
 
-        $shape ??= self::generateShape($array);
+        if (!isset($shape)) {
+            $shape = self::generateShape($array);
+        }
         $buffer = [];
         $index = 0;
 
@@ -61,7 +70,7 @@ class Tensor implements TensorInterface
      * @throws InvalidArgumentException If the number of elements in the string does not match the shape.
      * @throws \Exception
      */
-    public static function fromString(string $string, DType $dtype, array $shape) :static
+    public static function fromString(string $string, $dtype, array $shape)
     {
         $data = unpack($dtype->packFormat(), $string);
 
@@ -106,7 +115,7 @@ class Tensor implements TensorInterface
         return array_product($this->shape);
     }
 
-    public function reshape(array $shape) :static
+    public function reshape(array $shape)
     {
         if (array_product($shape) != array_product($this->shape)) {
             throw new InvalidArgumentException('New shape must have the same number of elements');
@@ -153,7 +162,7 @@ class Tensor implements TensorInterface
         return $shape;
     }
 
-    public static function flattenArray(array $nestedArray, array &$buffer, int &$index, ?DType $dtype) :void
+    public static function flattenArray(array $nestedArray, array &$buffer, int &$index,  $dtype)
     {
         foreach ($nestedArray as $value) {
             if (is_array($value)) {
@@ -191,12 +200,12 @@ class Tensor implements TensorInterface
         }
     }
 
-    public function offsetExists(mixed $offset) :bool
+    public function offsetExists($offset) :bool
     {
         return $offset >= 0 && $offset < $this->shape[0];
     }
 
-    public function offsetGet(mixed $offset) :mixed
+    public function offsetGet($offset)
     {
         if (!$this->offsetExists($offset)) {
             throw new OutOfBoundsException('Index out of bounds');
@@ -217,7 +226,7 @@ class Tensor implements TensorInterface
         return new self($buffer, $newShape, $this->dtype);
     }
 
-    public function offsetSet(mixed $offset, mixed $value) :void
+    public function offsetSet($offset, $value)
     {
         if (!$this->offsetExists($offset)) {
             throw new OutOfBoundsException('Index out of bounds');
@@ -243,7 +252,7 @@ class Tensor implements TensorInterface
         }
     }
 
-    public function offsetUnset(mixed $offset) :void
+    public function offsetUnset( $offset)
     {
         throw new RuntimeException('Cannot unset tensor elements');
     }
@@ -255,13 +264,13 @@ class Tensor implements TensorInterface
      * @return static The transposed Tensor instance.
      * @throws InvalidArgumentException If the tensor does not have exactly 4 dimensions.
      */
-    public function transposeBhwcToBchw() :static
+    public function transposeBhwcToBchw()
     {
         if (count($this->shape) !== 4) {
             throw new InvalidArgumentException('Tensor must have exactly 4 dimensions to transpose from BHWC to BCHW');
         }
 
-        [$batch, $height, $width, $channels] = $this->shape;
+        list($batch, $height, $width, $channels) = $this->shape;
         $newShape = [$batch, $channels, $height, $width];
         $newBuffer = array_fill(0, array_product($newShape), 0);
 
