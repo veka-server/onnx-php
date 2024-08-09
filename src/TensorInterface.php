@@ -14,7 +14,7 @@ interface TensorInterface extends ArrayAccess, Countable, IteratorAggregate
 
     public function ndim(): int;
 
-    public function dtype(): DType;
+    public function dtype();
 
     public function buffer();
 

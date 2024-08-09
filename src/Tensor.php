@@ -26,7 +26,7 @@ class Tensor implements TensorInterface
     public function __construct(
         array $buffer,
         array $shape,
-        DType $dtype
+        $dtype
     ) {
         $this->dtype = $dtype;
         $this->shape = $shape;
@@ -100,7 +100,7 @@ class Tensor implements TensorInterface
         return count($this->shape);
     }
 
-    public function dtype() :DType
+    public function dtype()
     {
         return $this->dtype;
     }
