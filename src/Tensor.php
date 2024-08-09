@@ -72,7 +72,7 @@ class Tensor implements TensorInterface
      */
     public static function fromString(string $string, $dtype, array $shape)
     {
-        $data = unpack($dtype->packFormat(), $string);
+        $data = unpack(DType::packFormat($dtype), $string);
 
         if ($data === false) {
             throw new RuntimeException('Error unpacking string data');
