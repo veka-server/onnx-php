@@ -133,7 +133,7 @@ class Tensor implements TensorInterface
     public function toString() :string
     {
         // Récupération du format de pack avant la boucle pour éviter de l'appeler à chaque itération
-        $packFormat = $this->dtype->packFormat();
+        $packFormat = DType::packFormat($this->dtype);
 
         $packedValues = '';
 
