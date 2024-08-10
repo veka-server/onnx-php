@@ -3,8 +3,8 @@
 namespace Onnx\Task;
 
 use Onnx\DType;
+use Onnx\Task\classes\Image;
 use Onnx\Tensor;
-use Task\classes\Image;
 
 class Vision
 {
