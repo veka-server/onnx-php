@@ -30,21 +30,21 @@ composer require veka-server/onnx-php
 #### Vision
 
 | Tâches                  | Description                                                                                                                                          | Statut |
-|-------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------|--------|
+|  :---                                           |   :---                                     |   :---:   |
 | Classification d'images | Attribuer une ou plusieurs étiquettes à une image, en identifiant à quelle catégorie l'image appartient parmi un ensemble de catégories prédéfinies. | ✅      |
 | Détection d'objets      | Localiser et identifier des objets spécifiques dans une image, en dessinant des boîtes englobantes autour des objets détectés et en les étiquetant avec leurs catégories correspondantes.  | ✅      |
 
 #### Traitement du Langage Naturel
 
 | Tâches                    | Description                                                                                                  | Statut |
-|-------------------------|--------------------------------------------------------------------------------------------------------------|--------|
+|  :---                                           |   :---                                     |   :---:   |
 | Génération de texte | Produire un texte cohérent et fluide en réponse à une entrée donnée, comme une phrase ou un contexte.        | ✅     |
 
 ## Modèles testé
 #### Classification d'images
 
 | Modèles                                          | Description                                      | Statut |
-|-------------------------------------------------|--------------------------------------------------|--------|
+|  :---                                           |   :---                                     |   :---:   |
 | [suko / nsfw](https://huggingface.co/suko/nsfw) | Permet de classer une image entre Naked et SAFE. | ✅      |
 | Naked                                           | ...                                              | ☐      |
 | NUDENET 1                                       | ...                                              | ☐      |
@@ -53,7 +53,7 @@ composer require veka-server/onnx-php
 #### Détection d'objets
 
 | Modèles                                          | Description                                      | Statut |
-|-------------------------------------------------|--------------------------------------------------|--------|
+|  :---                                           |   :---                                     |   :---:   |
 | YOLOV10                                         | ...                                              | ☐      |
 | YOLOV5 Face                                     | ...                                              | ☐      |
 | NUDENET 2                                       | ...                                              | ☐      |
