@@ -94,7 +94,7 @@ $ia = new Onnx\Task\Vision(config:[
     'shape' => 'bhwc', 
     
     // Chemin vers le modèle ONNX. Il doit pointer vers le fichier du modèle pré-entraîné.
-    'modelNameOrPath' => __DIR__.'/../models/model_suko_nsfw.onnx' // Chemin vers le modèle ONNX
+    'modelNameOrPath' => __DIR__.'/../models/model_suko_nsfw.onnx' 
 ]);
 
 /** Charger les modèles */
