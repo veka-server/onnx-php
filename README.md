@@ -40,10 +40,10 @@ composer require veka-server/onnx-php
 |-------------------------|--------------------------------------------------------------------------------------------------------------|--------|
 | Génération de texte | Produire un texte cohérent et fluide en réponse à une entrée donnée, comme une phrase ou un contexte.        | ✅     |
 
-## Models testé
+## Modèles testé
 #### Classification d'images
 
-| Models                                          | Description                                      | Statut |
+| Modèles                                          | Description                                      | Statut |
 |-------------------------------------------------|--------------------------------------------------|--------|
 | [suko / nsfw](https://huggingface.co/suko/nsfw) | Permet de classer une image entre Naked et SAFE. | ✅      |
 | Naked                                           | ...                                              | ☐      |
@@ -52,7 +52,7 @@ composer require veka-server/onnx-php
 
 #### Détection d'objets
 
-| Models                                          | Description                                      | Statut |
+| Modèles                                          | Description                                      | Statut |
 |-------------------------------------------------|--------------------------------------------------|--------|
 | YOLOV10                                         | ...                                              | ☐      |
 | YOLOV5 Face                                     | ...                                              | ☐      |
@@ -63,24 +63,41 @@ composer require veka-server/onnx-php
 ```php
 require_once(__DIR__.'/../vendor/autoload.php');
 
-/** Set the directory where the library will be downloaded, if it not set then it will be stored inside vendor directory */
+/** Définir le répertoire où la bibliothèque sera téléchargée. Si ce n'est pas défini, elle sera stockée dans le répertoire vendor */
 Onnx\Library::setFolder(__DIR__.'/../');
 
-/** Download the library if not found */
+/** Télécharger la bibliothèque si elle n'est pas trouvée */
 Onnx\Library::install();
 
-/** Instanciate Vision */
+/** Instancier Vision */
 $ia = new Onnx\Task\Vision(config:[
-    'tags' => [ 0 => "Naked", 1 => "Safe"]
-    ,'rescale_factor' => 0.00392156862745098
-    ,'format' => 'rgb'
-    ,'height' => 224
-    ,'width' => 224
-    ,'shape' => 'bhwc'  // batch channel height width
-    ,'modelNameOrPath' => __DIR__.'/../models/model_suko_nsfw.onnx' // https://huggingface.co/suko/nsfw
+    // Liste des étiquettes pour les classifications. Les indices correspondent aux identifiants des classes.
+    'tags' => [ 
+        0 => "Naked", 
+        1 => "Safe"  
+    ],
+    // Facteur de mise à l'échelle des valeurs des pixels de l'image. 
+    // Ce facteur est utilisé pour normaliser les valeurs des pixels, souvent de 0 à 1.
+    'rescale_factor' => 0.00392156862745098, // 1/255 pour convertir les valeurs de pixels de [0, 255] à [0, 1]
+    
+    // Format des canaux de couleur de l'image. 'rgb' signifie que l'image est en format Red, Green, Blue.
+    'format' => 'rgb',
+    
+    // Hauteur de l'image en pixels attendu par le modèle. Les images seront automatiquement redimensionné à cette dimmension.
+    'height' => 224,
+    
+    // Largeur de l'image en pixels attendu par le modèle. Les images seront automatiquement redimensionné à cette dimmension.
+    'width' => 224,
+    
+    // La forme des données d'entrée pour le modèle. 'bhwc' signifie que les données sont en format :
+    // batch (nombre d'images), height (hauteur des images), width (largeur des images), channel (nombre de canaux de couleur).
+    'shape' => 'bhwc', 
+    
+    // Chemin vers le modèle ONNX. Il doit pointer vers le fichier du modèle pré-entraîné.
+    'modelNameOrPath' => __DIR__.'/../models/model_suko_nsfw.onnx' // Chemin vers le modèle ONNX
 ]);
 
-/** Load models */
+/** Charger les modèles */
 $ia->loadModel();
 
 /** Analyse de l'image */
