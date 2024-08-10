@@ -52,6 +52,36 @@ composer require veka-server/onnx-php
 | NUDENET 2                                       | ...                                              | ☐      |
 | NUDENET 3                                       | ...                                              | ☐      |
 
+## Exemple d'utilisation
+```php
+require_once(__DIR__.'/../vendor/autoload.php');
+
+/** Set the directory where the library will be downloaded, if it not set then it will be stored inside vendor directory */
+Onnx\Library::setFolder(__DIR__.'/../');
+
+/** Download the library if not found */
+Onnx\Library::install();
+
+/** Instanciate Vision */
+$ia = new Onnx\Task\Vision(config:[
+    'tags' => [ 0 => "Naked", 1 => "Safe"]
+    ,'rescale_factor' => 0.00392156862745098
+    ,'format' => 'rgb'
+    ,'height' => 224
+    ,'width' => 224
+    ,'shape' => 'bhwc'  // batch channel height width
+    ,'modelNameOrPath' => __DIR__.'/../models/model_suko_nsfw.onnx' // https://huggingface.co/suko/nsfw
+]);
+
+/** Load models */
+$ia->loadModel();
+
+/** Analyse de l'image */
+$tags = $ia->getTags($img);
+
+var_dump($tags);
+
+```
 
 ## Contribution
 Les contributions sont les bienvenues !
