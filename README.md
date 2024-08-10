@@ -100,5 +100,8 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 ## Remerciements
 Un grand merci à la communauté ONNX et à tous les contributeurs de onnxruntime pour leur travail exceptionnel.
-Cette librairie est dérivé des travaux de [onnxruntime-php](https://github.com/ankane/onnxruntime-php) et [transformers-php](https://github.com/CodeWithKyrian/transformers-php)
+Cette librairie est dérivé des travaux de :
+- [onnxruntime-php](https://github.com/ankane/onnxruntime-php)
+- [transformers-php](https://github.com/CodeWithKyrian/transformers-php)
+- [onnxruntime](https://github.com/Microsoft/onnxruntime)
 
