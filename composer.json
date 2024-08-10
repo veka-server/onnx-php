@@ -11,12 +11,14 @@
     ],
     "autoload": {
         "psr-4": {
-            "Onnx\\" : "src/"
+            "Onnx\\" : "src/",
+            "Onnx\\Task\\" : "task/"
         }
     },
     "require": {
         "php": ">= 8.1",
         "ext-ffi": ">= 8.1",
+        "ext-gd": "*",
         "ffi/work-directory": "^1.0"
     }
 }
