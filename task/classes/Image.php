@@ -1,6 +1,6 @@
 <?php
 
-namespace Task\classes;
+namespace Onnx\Task\classes;
 
 class Image
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Task;
+namespace Onnx\Task;
 
 use Onnx\DType;
 use Onnx\Tensor;
