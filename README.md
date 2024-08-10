@@ -1,5 +1,12 @@
 # ONNX-PHP
 
+<p align="center">
+<a href="https://packagist.org/packages/codewithkyrian/transformers"><img src="https://img.shields.io/packagist/dt/veka-server/onnx-php" alt="Total Downloads"></a>
+<a href="https://packagist.org/packages/codewithkyrian/transformers"><img src="https://img.shields.io/packagist/v/veka-server/onnx-php" alt="Latest Stable Version"></a>
+<a href="https://github.com/CodeWithKyrian/transformers-php/blob/main/LICENSE"><img src="https://img.shields.io/github/license/veka-server/onnx-php" alt="License"></a>
+<a href="https://github.com/codewithkyrian/transformers-php"><img src="https://img.shields.io/github/repo-size/veka-server/onnx-php" alt="Documentation"></a>
+</p>
+
 **ONNX-PHP** est une bibliothèque PHP permettant de charger et d'exécuter des modèles IA au format ONNX.
 Dans cet objectif, la librairie utilise `FFI` pour interagir directement avec `onnxruntime`. 
 
