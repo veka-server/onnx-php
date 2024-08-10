@@ -1,4 +1,4 @@
-# ONNX-PHP
+<h1 align="center">ONNX-PHP</h1>
 
 <p align="center">
 <a href="https://packagist.org/packages/codewithkyrian/transformers"><img src="https://img.shields.io/packagist/dt/veka-server/onnx-php" alt="Total Downloads"></a>
