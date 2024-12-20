@@ -48,7 +48,7 @@ composer require veka-server/onnx-php
 | [suko / nsfw](https://huggingface.co/suko/nsfw) | classification : Naked , SAFE | ✅      | [wiki](https://github.com/veka-server/onnx-php/wiki/suko-nsfw) |
 | wd14                                            | ...                                              | ☐      |   |
 | [NUDENET classifier (classifier_model.onnx)](https://github.com/notAI-tech/NudeNet)      | classification : unsafe , safe      | ✅      | [wiki](https://github.com/veka-server/onnx-php/wiki/nudenet%E2%80%90classifier) |
-| [NSFW Detection](https://github.com/iola1999/nsfw-detect-onnx)      | classification : drawing, hentai, neutral, porn, sexy      | ✅      | [wiki](https://github.com/veka-server/onnx-php/wiki/nsfw-detection) |
+| [NSFW Detection](https://github.com/iola1999/nsfw-detect-onnx)      | classification : drawing, hentai, neutral, porn, sexy      | ✅      | [wiki](https://github.com/veka-server/onnx-php/wiki/nsfw%E2%80%90detection) |
 
 #### Détection d'objets
 
