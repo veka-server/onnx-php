@@ -55,7 +55,7 @@ composer require veka-server/onnx-php
 | Modèles                                          | Description                                      | Statut | Exemple |
 |  :---                                           |     :---                       |   :---:   |   :---:   |
 | [YOLOV10](https://huggingface.co/onnx-community/yolov10m)                                         |  detection de la liste COCO [voir la liste](https://github.com/amikelive/coco-labels)                                              | ✅      |  [wiki](https://github.com/veka-server/onnx-php/wiki/yolov10)   |
-| YOLOV5 Face                                     | ...                                              | ☐      |     |
+| YOLOV5 Face                                     | detection des visages                                          | ✅      |     |
 | [NUDENET v3 detector (640m.onnx) ](https://github.com/notAI-tech/NudeNet)      | detection : FEMALE_GENITALIA_COVERED, FACE_FEMALE, BUTTOCKS_EXPOSED, FEMALE_BREAST_EXPOSED, FEMALE_GENITALIA_EXPOSED, MALE_BREAST_EXPOSED, ANUS_EXPOSED, FEET_EXPOSED, BELLY_COVERED, FEET_COVERED, ARMPITS_COVERED, ARMPITS_EXPOSED, FACE_MALE, BELLY_EXPOSED, MALE_GENITALIA_EXPOSED, ANUS_COVERED, FEMALE_BREAST_COVERED, BUTTOCKS_COVERED                             | ✅      | [wiki](https://github.com/veka-server/onnx-php/wiki/nudenet%E2%80%90detection) |
 
 ## Exemple d'utilisation
