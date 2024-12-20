@@ -43,12 +43,12 @@ composer require veka-server/onnx-php
 ## Modèles testé
 #### Classification d'images
 
-| Modèles                                          | Description                                      | Statut |
+| Modèles                                         | Description                                      | Statut |
 |  :---                                           |   :---                                     |   :---:   |
-| [suko / nsfw](https://huggingface.co/suko/nsfw) | Permet de classer une image entre Naked et SAFE. | ✅      |
-| Naked                                           | ...                                              | ☐      |
-| NUDENET 1                                       | ...                                              | ☐      |
-| [NSFW Detection](https://github.com/iola1999/nsfw-detect-onnx)      | Permet de classer une image en 5 catégories (drawing, hentai, neutral, porn, sexy)      | ✅      |
+| [suko / nsfw](https://huggingface.co/suko/nsfw) | classification : Naked , SAFE | ✅      |
+| wd14                                            | ...                                              | ☐      |
+| [NUDENET classifier (classifier_model.onnx)](https://github.com/notAI-tech/NudeNet)      | classification : unsafe , safe      | ✅      |
+| [NSFW Detection](https://github.com/iola1999/nsfw-detect-onnx)      | classification : drawing, hentai, neutral, porn, sexy      | ✅      |
 
 #### Détection d'objets
 
@@ -56,8 +56,7 @@ composer require veka-server/onnx-php
 |  :---                                           |   :---                                     |   :---:   |
 | YOLOV10                                         | ...                                              | ☐      |
 | YOLOV5 Face                                     | ...                                              | ☐      |
-| NUDENET 2                                       | ...                                              | ☐      |
-| NUDENET 3                                       | ...                                              | ☐      |
+| [NUDENET v3 detector (640m.onnx) ](https://github.com/notAI-tech/NudeNet)      | detection : FEMALE_GENITALIA_COVERED, FACE_FEMALE, BUTTOCKS_EXPOSED, FEMALE_BREAST_EXPOSED, FEMALE_GENITALIA_EXPOSED, MALE_BREAST_EXPOSED, ANUS_EXPOSED, FEET_EXPOSED, BELLY_COVERED, FEET_COVERED, ARMPITS_COVERED, ARMPITS_EXPOSED, FACE_MALE, BELLY_EXPOSED, MALE_GENITALIA_EXPOSED, ANUS_COVERED, FEMALE_BREAST_COVERED, BUTTOCKS_COVERED                             | ✅      |
 
 ## Exemple d'utilisation
 ```php
