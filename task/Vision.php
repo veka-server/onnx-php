@@ -123,7 +123,7 @@ class Vision
         return $t;
     }
 
-    public function setProvider(string $provider = null) :void
+    public function setProvider(string|null $provider) :void
     {
         if(empty($provider)) {
             $this->provider = 'CPUExecutionProvider';
