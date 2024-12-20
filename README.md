@@ -48,7 +48,7 @@ composer require veka-server/onnx-php
 | [suko / nsfw](https://huggingface.co/suko/nsfw) | Permet de classer une image entre Naked et SAFE. | ✅      |
 | Naked                                           | ...                                              | ☐      |
 | NUDENET 1                                       | ...                                              | ☐      |
-| NSFW                                         | ...                                              | ☐      |
+| [NSFW Detection](https://github.com/iola1999/nsfw-detect-onnx)      | Permet de classer une image en 5 catégories (drawing, hentai, neutral, porn, sexy)      | ✅      |
 
 #### Détection d'objets
 
